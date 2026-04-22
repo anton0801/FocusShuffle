@@ -94,7 +94,73 @@ struct FSFont {
     }
 }
 
-// MARK: - Reusable Buttons
+struct FocusShuffleNotificationView: View {
+    let viewModel: FocusShuffleViewModel
+    
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack {
+                Color.black.ignoresSafeArea()
+                
+                Image("bg_for_notifications")
+                    .resizable().scaledToFill()
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .ignoresSafeArea().opacity(0.6)
+                
+                VStack(spacing: 12) {
+                    Spacer()
+                    
+                    Text("ALLOW NOTIFICATIONS ABOUT BONUSES AND PROMOS")
+                        .font(.system(size: 24, weight: .black, design: .rounded))
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 12)
+                        .multilineTextAlignment(.center)
+                    
+                    Text("STAY TUNED WITH BEST OFFERS FROM OUR CASINO")
+                        .font(.system(size: 16, weight: .bold, design: .rounded))
+                        .foregroundColor(.white.opacity(0.7))
+                        .padding(.horizontal, 12)
+                        .multilineTextAlignment(.center)
+                    
+                    actionButtons
+                }
+                .padding(.bottom, 24)
+            }
+        }
+        .ignoresSafeArea()
+        .preferredColorScheme(.dark)
+    }
+    
+    private var actionButtons: some View {
+        VStack(spacing: 12) {
+            Button {
+                viewModel.authorize()
+            } label: {
+                Text("Yes, I Want Bonuses!")
+                    .font(.system(size: 16, weight: .bold, design: .rounded))
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(
+                        Color(hex: "#00ABFF")
+                    )
+                    .cornerRadius(12)
+                
+            }
+            .padding(.horizontal, 24)
+            
+            Button {
+                viewModel.skip()
+            } label: {
+                Text("Skip")
+                    .font(.system(size: 13, weight: .medium, design: .rounded))
+                    .foregroundColor(.white.opacity(0.7))
+            }
+        }
+    }
+    
+}
+
 struct FSPrimaryButton: View {
     let title: String
     let icon: String?

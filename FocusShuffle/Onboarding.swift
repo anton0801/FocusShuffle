@@ -97,6 +97,27 @@ struct OnboardingPage {
     let feature: OnboardingFeature
 }
 
+struct UnavailableView: View {
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack {
+                Color.black.ignoresSafeArea()
+                Image("error_bg")
+                    .resizable().scaledToFill()
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .ignoresSafeArea()
+                    .blur(radius: 2)
+                    .opacity(0.8)
+                
+                Image("error_alert")
+                    .resizable()
+                    .frame(width: 220, height: 180)
+            }
+        }
+        .ignoresSafeArea()
+    }
+}
+
 enum OnboardingFeature { case thimbles, shuffle, decision }
 
 struct OnboardingPageView: View {

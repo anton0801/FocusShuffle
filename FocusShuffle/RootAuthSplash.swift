@@ -1,16 +1,19 @@
 import SwiftUI
+import Combine
+import Network
 
-// MARK: - Root
 struct RootView: View {
-    @EnvironmentObject var appState: AppState
-    @State private var showSplash = true
+    
+    @StateObject private var appState = AppState()
+    @StateObject private var taskVM = TaskViewModel()
+    @StateObject private var decisionVM = DecisionViewModel()
+    @StateObject private var analyticsVM = AnalyticsViewModel()
+    @StateObject private var focusVM = FocusViewModel()
+    @StateObject private var gamificationVM = GamificationViewModel()
 
     var body: some View {
         ZStack {
-            if showSplash {
-                SplashView()
-                    .transition(.opacity)
-            } else if !appState.hasCompletedOnboarding {
+            if !appState.hasCompletedOnboarding {
                 OnboardingContainerView()
                     .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .opacity))
             } else if !appState.isLoggedIn {
@@ -21,95 +24,175 @@ struct RootView: View {
                     .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .opacity))
             }
         }
-        .animation(.spring(response: 0.5, dampingFraction: 0.8), value: showSplash)
         .animation(.spring(response: 0.5, dampingFraction: 0.8), value: appState.isLoggedIn)
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.8) {
-                withAnimation { showSplash = false }
-            }
-        }
+        .environmentObject(appState)
+        .environmentObject(taskVM)
+        .environmentObject(decisionVM)
+        .environmentObject(analyticsVM)
+        .environmentObject(focusVM)
+        .environmentObject(gamificationVM)
+        .preferredColorScheme(appState.colorScheme)
     }
 }
 
-// MARK: - Splash
+
 struct SplashView: View {
     @State private var scale: CGFloat = 0.4
+    @State private var networkMonitor = NWPathMonitor()
     @State private var opacity: Double = 0
     @State private var glowIntensity: Double = 0
     @State private var ring1Scale: CGFloat = 0.6
-    @State private var ring2Scale: CGFloat = 0.6
+    @StateObject private var viewModel: FocusShuffleViewModel
     @State private var thimbleRotation: Double = 0
+    @State private var cancellables = Set<AnyCancellable>()
+    
+    init() {
+        let store = StoragePlugin()
+        let validator = ValidationPlugin()
+        let conversionFetcher = AttributionPlugin()
+        let configFetcher = RemoteConfigPlugin()
+        let authorizer = AuthorizationPlugin()
+        
+        let engine = FocusShuffleEngine(
+            store: store,
+            validator: validator,
+            conversionFetcher: conversionFetcher,
+            configFetcher: configFetcher,
+            authorizer: authorizer
+        )
+        
+        _viewModel = StateObject(wrappedValue: FocusShuffleViewModel(engine: engine))
+    }
+    
+    @State private var ring2Scale: CGFloat = 0.6
     @State private var subtitle = false
 
     var body: some View {
-        ZStack {
-            AppBackground()
-
-            VStack(spacing: 0) {
-                Spacer()
-
-                ZStack {
-                    // Glow rings
-                    Circle()
-                        .stroke(Color.fsViolet.opacity(0.3), lineWidth: 2)
-                        .frame(width: 160, height: 160)
-                        .scaleEffect(ring1Scale)
-                        .blur(radius: 4)
-                    Circle()
-                        .stroke(Color.fsCyan.opacity(0.2), lineWidth: 1)
-                        .frame(width: 220, height: 220)
-                        .scaleEffect(ring2Scale)
-                        .blur(radius: 6)
-
-                    // Thimbles
-                    HStack(spacing: -8) {
-                        ThimbleSplashIcon(color: .fsElectricBlue, offset: -10)
-                            .rotationEffect(.degrees(thimbleRotation))
-                        ThimbleSplashIcon(color: .fsViolet, offset: 0)
-                        ThimbleSplashIcon(color: .fsCyan, offset: 10)
-                            .rotationEffect(.degrees(-thimbleRotation))
-                    }
-                    .shadow(color: .fsViolet.opacity(0.5), radius: CGFloat(glowIntensity * 20))
+        NavigationView {
+            ZStack {
+                AppBackground()
+                
+                GeometryReader { geometry in
+                    Image("loading_bg")
+                        .resizable().scaledToFill()
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .ignoresSafeArea()
+                        .blur(radius: 2)
+                        .opacity(0.8)
                 }
-                .scaleEffect(scale)
-                .opacity(opacity)
-
-                Spacer().frame(height: 32)
-
-                VStack(spacing: 8) {
-                    Text("Focus Shuffle")
-                        .font(FSFont.display(36))
-                        .foregroundStyle(LinearGradient(
-                            colors: [.fsCyan, .fsElectricBlue, .fsViolet],
-                            startPoint: .leading, endPoint: .trailing))
-                    if subtitle {
-                        Text("Train Attention. Make Better Decisions.")
-                            .font(FSFont.body(15))
-                            .foregroundColor(.fsTextSecond)
-                            .transition(.move(edge: .bottom).combined(with: .opacity))
+                .ignoresSafeArea()
+                
+                NavigationLink(
+                    destination: FocusShuffleWebView().navigationBarHidden(true),
+                    isActive: $viewModel.navigateToWeb
+                ) { EmptyView() }
+                
+                NavigationLink(
+                    destination: RootView().navigationBarBackButtonHidden(true),
+                    isActive: $viewModel.navigateToMain
+                ) { EmptyView() }
+                
+                VStack(spacing: 0) {
+                    Spacer()
+                    
+                    ZStack {
+                        // Glow rings
+                        Circle()
+                            .stroke(Color.fsViolet.opacity(0.3), lineWidth: 2)
+                            .frame(width: 160, height: 160)
+                            .scaleEffect(ring1Scale)
+                            .blur(radius: 4)
+                        Circle()
+                            .stroke(Color.fsCyan.opacity(0.2), lineWidth: 1)
+                            .frame(width: 220, height: 220)
+                            .scaleEffect(ring2Scale)
+                            .blur(radius: 6)
+                        
+                        // Thimbles
+                        HStack(spacing: -8) {
+                            ThimbleSplashIcon(color: .fsElectricBlue, offset: -10)
+                                .rotationEffect(.degrees(thimbleRotation))
+                            ThimbleSplashIcon(color: .fsViolet, offset: 0)
+                            ThimbleSplashIcon(color: .fsCyan, offset: 10)
+                                .rotationEffect(.degrees(-thimbleRotation))
+                        }
+                        .shadow(color: .fsViolet.opacity(0.5), radius: CGFloat(glowIntensity * 20))
                     }
+                    .scaleEffect(scale)
+                    .opacity(opacity)
+                    
+                    Spacer().frame(height: 32)
+                    
+                    VStack(spacing: 8) {
+                        Text("Focus Shuffle")
+                            .font(FSFont.display(36))
+                            .foregroundStyle(LinearGradient(
+                                colors: [.fsCyan, .fsElectricBlue, .fsViolet],
+                                startPoint: .leading, endPoint: .trailing))
+                        if subtitle {
+                            Text("Loading app content...\nWait when loads")
+                                .font(FSFont.body(15))
+                                .foregroundColor(.fsTextSecond)
+                                .transition(.move(edge: .bottom).combined(with: .opacity))
+                                .multilineTextAlignment(.center)
+                        }
+                        ProgressView().tint(.white)
+                    }
+                    .opacity(opacity)
+                    
+                    Spacer()
                 }
-                .opacity(opacity)
-
-                Spacer()
+            }
+            .fullScreenCover(isPresented: $viewModel.showPermissionPrompt) {
+                FocusShuffleNotificationView(viewModel: viewModel)
+            }
+            .fullScreenCover(isPresented: $viewModel.showOfflineView) {
+                UnavailableView()
+            }
+            .onAppear {
+                withAnimation(.spring(response: 0.8, dampingFraction: 0.6)) {
+                    scale = 1.0; opacity = 1.0; glowIntensity = 1.0
+                }
+                withAnimation(.easeInOut(duration: 1.2).delay(0.3).repeatForever(autoreverses: true)) {
+                    ring1Scale = 1.1; ring2Scale = 1.05
+                }
+                NotificationCenter.default.publisher(for: Notification.Name("deeplink_values"))
+                    .compactMap { $0.userInfo?["deeplinksData"] as? [String: Any] }
+                    .sink { data in
+                        viewModel.handleLinkData(data)
+                    }
+                    .store(in: &cancellables)
+                withAnimation(.easeInOut(duration: 2.0).delay(0.5).repeatForever(autoreverses: true)) {
+                    thimbleRotation = 15
+                }
+                NotificationCenter.default.publisher(for: Notification.Name("ConversionDataReceived"))
+                    .compactMap { $0.userInfo?["conversionData"] as? [String: Any] }
+                    .sink { data in
+                        viewModel.handleConversionData(data)
+                    }
+                    .store(in: &cancellables)
+                
+                withAnimation(.spring(response: 0.5).delay(1.0)) {
+                    subtitle = true
+                }
+                setupNetworkMonitoring()
+                viewModel.startup()
             }
         }
-        .onAppear {
-            withAnimation(.spring(response: 0.8, dampingFraction: 0.6)) {
-                scale = 1.0; opacity = 1.0; glowIntensity = 1.0
-            }
-            withAnimation(.easeInOut(duration: 1.2).delay(0.3).repeatForever(autoreverses: true)) {
-                ring1Scale = 1.1; ring2Scale = 1.05
-            }
-            withAnimation(.easeInOut(duration: 2.0).delay(0.5).repeatForever(autoreverses: true)) {
-                thimbleRotation = 15
-            }
-            withAnimation(.spring(response: 0.5).delay(1.0)) {
-                subtitle = true
-            }
-        }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
+    
+    private func setupNetworkMonitoring() {
+        networkMonitor.pathUpdateHandler = { path in
+            Task { @MainActor in
+                viewModel.networkChanged(path.status == .satisfied)
+            }
+        }
+        networkMonitor.start(queue: .global(qos: .background))
+    }
+    
 }
+
 
 struct ThimbleSplashIcon: View {
     let color: Color

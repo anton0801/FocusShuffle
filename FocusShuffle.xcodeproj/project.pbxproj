@@ -8,11 +8,44 @@
 
 /* Begin PBXBuildFile section */
 		8F41C8782F9406E900319557 /* codemagic.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 8F41C8772F9406E300319557 /* codemagic.yaml */; };
+		8F7D3E8E2F992EB300A2568D /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = 8F7D3E8D2F992EB300A2568D /* PostgREST */; };
+		8F7D3E902F992EB300A2568D /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 8F7D3E8F2F992EB300A2568D /* Supabase */; };
+		8F7D3E932F992EDB00A2568D /* AppsFlyerLib in Frameworks */ = {isa = PBXBuildFile; productRef = 8F7D3E922F992EDB00A2568D /* AppsFlyerLib */; };
+		8F7D3E962F992F1300A2568D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 8F7D3E952F992F1300A2568D /* Lottie */; };
+		8F7D3E992F992F3400A2568D /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8F7D3E982F992F3400A2568D /* FirebaseCore */; };
+		8F7D3E9B2F992F3400A2568D /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8F7D3E9A2F992F3400A2568D /* FirebaseMessaging */; };
+		8F7D3EA92F992F9A00A2568D /* ServiceNotificationExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8F7D3EA22F992F9A00A2568D /* ServiceNotificationExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8F7D3EB12F992FA700A2568D /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8F7D3EB02F992FA700A2568D /* FirebaseMessaging */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8F7D3EA72F992F9A00A2568D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8F677ED82F884C8B00BA1736 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8F7D3EA12F992F9A00A2568D;
+			remoteInfo = ServiceNotificationExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8F7D3EAE2F992F9A00A2568D /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				8F7D3EA92F992F9A00A2568D /* ServiceNotificationExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		8F41C8772F9406E300319557 /* codemagic.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = codemagic.yaml; sourceTree = "<group>"; };
 		8F677EE02F884C8B00BA1736 /* FocusShuffle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusShuffle.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F7D3EA22F992F9A00A2568D /* ServiceNotificationExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ServiceNotificationExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -22,6 +55,13 @@
 				Info.plist,
 			);
 			target = 8F677EDF2F884C8B00BA1736 /* FocusShuffle */;
+		};
+		8F7D3EAD2F992F9A00A2568D /* Exceptions for "ServiceNotificationExtension" folder in "ServiceNotificationExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 8F7D3EA12F992F9A00A2568D /* ServiceNotificationExtension */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -34,6 +74,14 @@
 			path = FocusShuffle;
 			sourceTree = "<group>";
 		};
+		8F7D3EA32F992F9A00A2568D /* ServiceNotificationExtension */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8F7D3EAD2F992F9A00A2568D /* Exceptions for "ServiceNotificationExtension" folder in "ServiceNotificationExtension" target */,
+			);
+			path = ServiceNotificationExtension;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +89,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F7D3E9B2F992F3400A2568D /* FirebaseMessaging in Frameworks */,
+				8F7D3E902F992EB300A2568D /* Supabase in Frameworks */,
+				8F7D3E992F992F3400A2568D /* FirebaseCore in Frameworks */,
+				8F7D3E8E2F992EB300A2568D /* PostgREST in Frameworks */,
+				8F7D3E932F992EDB00A2568D /* AppsFlyerLib in Frameworks */,
+				8F7D3E962F992F1300A2568D /* Lottie in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F7D3E9F2F992F9A00A2568D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F7D3EB12F992FA700A2568D /* FirebaseMessaging in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +114,8 @@
 			children = (
 				8F41C8772F9406E300319557 /* codemagic.yaml */,
 				8F677EE22F884C8B00BA1736 /* FocusShuffle */,
+				8F7D3EA32F992F9A00A2568D /* ServiceNotificationExtension */,
+				8F7D3EAF2F992FA700A2568D /* Frameworks */,
 				8F677EE12F884C8B00BA1736 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -60,8 +124,16 @@
 			isa = PBXGroup;
 			children = (
 				8F677EE02F884C8B00BA1736 /* FocusShuffle.app */,
+				8F7D3EA22F992F9A00A2568D /* ServiceNotificationExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		8F7D3EAF2F992FA700A2568D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,20 +146,51 @@
 				8F677EDC2F884C8B00BA1736 /* Sources */,
 				8F677EDD2F884C8B00BA1736 /* Frameworks */,
 				8F677EDE2F884C8B00BA1736 /* Resources */,
+				8F7D3EAE2F992F9A00A2568D /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8F7D3EA82F992F9A00A2568D /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				8F677EE22F884C8B00BA1736 /* FocusShuffle */,
 			);
 			name = FocusShuffle;
 			packageProductDependencies = (
+				8F7D3E8D2F992EB300A2568D /* PostgREST */,
+				8F7D3E8F2F992EB300A2568D /* Supabase */,
+				8F7D3E922F992EDB00A2568D /* AppsFlyerLib */,
+				8F7D3E952F992F1300A2568D /* Lottie */,
+				8F7D3E982F992F3400A2568D /* FirebaseCore */,
+				8F7D3E9A2F992F3400A2568D /* FirebaseMessaging */,
 			);
 			productName = FocusShuffle;
 			productReference = 8F677EE02F884C8B00BA1736 /* FocusShuffle.app */;
 			productType = "com.apple.product-type.application";
+		};
+		8F7D3EA12F992F9A00A2568D /* ServiceNotificationExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8F7D3EAA2F992F9A00A2568D /* Build configuration list for PBXNativeTarget "ServiceNotificationExtension" */;
+			buildPhases = (
+				8F7D3E9E2F992F9A00A2568D /* Sources */,
+				8F7D3E9F2F992F9A00A2568D /* Frameworks */,
+				8F7D3EA02F992F9A00A2568D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				8F7D3EA32F992F9A00A2568D /* ServiceNotificationExtension */,
+			);
+			name = ServiceNotificationExtension;
+			packageProductDependencies = (
+				8F7D3EB02F992FA700A2568D /* FirebaseMessaging */,
+			);
+			productName = ServiceNotificationExtension;
+			productReference = 8F7D3EA22F992F9A00A2568D /* ServiceNotificationExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -103,6 +206,9 @@
 						CreatedOnToolsVersion = 16.4;
 						LastSwiftMigration = 1640;
 					};
+					8F7D3EA12F992F9A00A2568D = {
+						CreatedOnToolsVersion = 16.4;
+					};
 				};
 			};
 			buildConfigurationList = 8F677EDB2F884C8B00BA1736 /* Build configuration list for PBXProject "FocusShuffle" */;
@@ -114,12 +220,19 @@
 			);
 			mainGroup = 8F677ED72F884C8B00BA1736;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				8F7D3E8C2F992EB300A2568D /* XCRemoteSwiftPackageReference "supabase-swift" */,
+				8F7D3E912F992EDB00A2568D /* XCRemoteSwiftPackageReference "AppsFlyerFramework" */,
+				8F7D3E942F992F1300A2568D /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				8F7D3E972F992F3400A2568D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8F677EE12F884C8B00BA1736 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				8F677EDF2F884C8B00BA1736 /* FocusShuffle */,
+				8F7D3EA12F992F9A00A2568D /* ServiceNotificationExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -133,6 +246,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8F7D3EA02F992F9A00A2568D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -143,7 +263,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8F7D3E9E2F992F9A00A2568D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8F7D3EA82F992F9A00A2568D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8F7D3EA12F992F9A00A2568D /* ServiceNotificationExtension */;
+			targetProxy = 8F7D3EA72F992F9A00A2568D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		8F677EEA2F884C8C00BA1736 /* Debug */ = {
@@ -274,6 +409,7 @@
 				INFOPLIST_FILE = FocusShuffle/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Focus Shuffle";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Allow to use this feature in this application.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Focus Shuffle relies on ephemeral, non-personal device signals to adapt session pacing, verify feature behavior, and keep interactions smooth. These signals are used transiently for on-device processing and aggregated insights, without creating user identities or persistent profiles. They are never used to follow you across other apps or websites, nor disclosed to third parties for advertising.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -288,7 +424,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.3;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shufflingfocc.FocusShuffle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -317,6 +453,7 @@
 				INFOPLIST_FILE = FocusShuffle/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Focus Shuffle";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Allow to use this feature in this application.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Focus Shuffle relies on ephemeral, non-personal device signals to adapt session pacing, verify feature behavior, and keep interactions smooth. These signals are used transiently for on-device processing and aggregated insights, without creating user identities or persistent profiles. They are never used to follow you across other apps or websites, nor disclosed to third parties for advertising.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -331,7 +468,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.3;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shufflingfocc.FocusShuffle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -342,6 +479,67 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Release;
+		};
+		8F7D3EAB2F992F9A00A2568D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ServiceNotificationExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ServiceNotificationExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shufflingfocc.FocusShuffle.ServiceNotificationExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8F7D3EAC2F992F9A00A2568D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ServiceNotificationExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ServiceNotificationExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shufflingfocc.FocusShuffle.ServiceNotificationExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -366,7 +564,89 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		8F7D3EAA2F992F9A00A2568D /* Build configuration list for PBXNativeTarget "ServiceNotificationExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F7D3EAB2F992F9A00A2568D /* Debug */,
+				8F7D3EAC2F992F9A00A2568D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8F7D3E8C2F992EB300A2568D /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
+		8F7D3E912F992EDB00A2568D /* XCRemoteSwiftPackageReference "AppsFlyerFramework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppsFlyerSDK/AppsFlyerFramework";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.18.0;
+			};
+		};
+		8F7D3E942F992F1300A2568D /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.6.0;
+			};
+		};
+		8F7D3E972F992F3400A2568D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.12.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8F7D3E8D2F992EB300A2568D /* PostgREST */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8F7D3E8C2F992EB300A2568D /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = PostgREST;
+		};
+		8F7D3E8F2F992EB300A2568D /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8F7D3E8C2F992EB300A2568D /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+		8F7D3E922F992EDB00A2568D /* AppsFlyerLib */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8F7D3E912F992EDB00A2568D /* XCRemoteSwiftPackageReference "AppsFlyerFramework" */;
+			productName = AppsFlyerLib;
+		};
+		8F7D3E952F992F1300A2568D /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8F7D3E942F992F1300A2568D /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+		8F7D3E982F992F3400A2568D /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8F7D3E972F992F3400A2568D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		8F7D3E9A2F992F3400A2568D /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8F7D3E972F992F3400A2568D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		8F7D3EB02F992FA700A2568D /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8F7D3E972F992F3400A2568D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8F677ED82F884C8B00BA1736 /* Project object */;
 }
